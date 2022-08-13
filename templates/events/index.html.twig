@@ -1,0 +1,201 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Events index{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar bg-light fixed-top">
+        <div class="container-fluid">
+            <button class="burger-button" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                 <img src="{{ asset ('build/images/Menu.svg') }}" alt="Burger-menu" width="42" height="42"> 
+            </button>
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <img src="{{ asset ('build/images/Logo_PhDTalent.png') }}" alt="Logo_PhDTalent"> 
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <hr style="width:85%">
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item dropdown">
+                            
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset ('build/images/Profile.svg') }}" alt="Profile">
+                                My profile
+                                <i class="bi bi-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset ('build/images/Network.svg') }}" alt="Network">
+                                My network
+                                <i class="bi bi-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            
+                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ asset ('build/images/vector-commu.svg') }}" alt="vector-commu">
+                                Communities
+                                <i class="bi bi-chevron-down"></i>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="{{ asset ('build/images/Vector-env.svg') }}" alt="Vector-env">
+                                Inbox
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="{{ asset ('build/images/Home.svg') }}" alt="Home">
+                                Companies
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="{{ asset ('build/images/Briefcase.svg') }}" alt="Briefcase">
+                                Find a job
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="{{ asset ('build/images/Folder.svg') }}" alt="Folder">
+                                Find a mission
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="{{ asset ('build/images/Calendar-grey.svg') }}" alt="Calendar-grey">
+                                Find an event
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="{{ asset ('build/images/Publication.svg') }}" alt="Publication">
+                                Publications
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-menu-header">
+                <img src="{{ asset ('build/images/chat-bubble.svg') }}" alt="chat-bubble"> 
+                <img src="{{ asset ('build/images/Notification.svg') }}" alt="Notification"> 
+                <img src="{{ asset ('build/images/profile_picture.png') }}" alt="profile_picture" width="35" height="35">
+                <span>Jane Doe</span>
+                <img src="{{ asset ('build/images/vector-arrow.svg') }}" alt="vector_arrow"> 
+            </div>
+        </div>
+    </nav>
+
+    <hr style="margin-top:100px; color:#979797">
+
+    <div class="trending">
+        <div class="container">
+            <div class="row">
+
+                <div class="menu col-lg-4 col-md-6 col-sm-12">
+                    <div class="menuItemSection_trending menuActive" data-set='1'>
+                        Upcoming events
+                    </div>
+                    <div class="menuItemSection_trending" data-set='2'>
+                        Past events
+                    </div>
+                </div>
+            </div>
+
+            <div class="containerParent containerParentActive containerParent_1">
+                <div class="containerSection_trending">
+                    <div class="list-cards">
+                        <div class="container">
+                            <div class="row">
+                                {% for event in events %}
+                                <div class="col-lg-4 col-md-6 col-xs-12 mb-4">
+                                    <div class="card">
+                                        <img src="{{ asset ('build/images/group-photo.jpg') }}" alt="group-photo">
+                                        <div class="title">{{ event.titre }}</div>
+                                        <div class="card-type-orga">
+                                        <div class="orga">{{ event.organisateur }}</div>
+                                        <div class="type">{{ event.type }}</div>
+                                        </div>
+                                        <div class="lieu"><img src="{{ asset ('build/images/Vector-lieu.svg') }}" alt="Vector-lieu">{{ event.lieu }}, France</div>
+                                        <div class="date"><img src="{{ asset ('build/images/Vector-calend.svg') }}" alt="Vector-calend">{{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}</div>
+                                    </div>
+                                </div>
+                                {% endfor%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="containerParent containerParent_2">
+                <div class="containerSection_trending">
+                    <h1>Events index</h1>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Titre</th>
+                                <th>Organisateur</th>
+                                <th>Type</th>
+                                <th>Lieu</th>
+                                <th>Date</th>
+                                <th>actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for event in events %}
+                            <tr>
+                                <td>{{ event.id }}</td>
+                                <td>{{ event.titre }}</td>
+                                <td>{{ event.organisateur }}</td>
+                                <td>{{ event.type }}</td>
+                                <td>{{ event.lieu }}</td>
+                                <td>{{ event.date ? event.date|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>
+                                    <a href="{{ path('app_events_show', {'id': event.id}) }}">show</a>
+                                    <a href="{{ path('app_events_edit', {'id': event.id}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <a href="{{ path('app_events_new') }}">Create new</a>
+                </div>
+            </div>
+
+		</div>
+    </div><!-- .trending -->
+
+
+    
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('scripts') }}
+{% endblock %}
